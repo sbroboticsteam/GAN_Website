@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GAN Website</title>
+    <style>
+      .heading {
+        text-align: center;
+      }
+      img {
+        width: 45%;
+      }
+      .inputimg {
+        display: flex;
+        align-content: space-around;
+        justify-content: flex-start;
+        padding: 10px;
+      }
+      .outputimg {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: auto;
+      }
+      .label {
+        font-size: x-large;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 class="heading">Generative Adersial Nerual Network</h1>
+    <form action='{{ url_for("index")}}' method="post">
+      <label for="input_Image" class="label">Input Image URL:</label>
+      <input type="text" id="input_Image" name="input_Image" /><br /><br />
+      <label for="style_Image" class="label">Style Image URL:</label>
+      <input type="text" id="style_Image" name="style_Image" /><br /><br />
+      <button type="submit" id="submit">SUBMIT</button>
+    </form>
+    <div class="inputimg">
+      <img id="inputimg_1" src="{{ input }}" />
+      <img id="inputimg_2" src="{{ style }}" />
+    </div>
+    <h1 class="heading">Output</h1>
+    <div class="outputimg">
+      <img id="output-img" src="{{ url_for('static', filename=value) }}" />
+    </div>
+  </body>
+  <script>
+    const submitButton = document.getElementById("submit");
+    submitButton.onclick = () => {
+      document.getElementById("inputimg_1").src =
+        document.getElementById("input_Image").value;
+      document.getElementById("inputimg_2").src =
+        document.getElementById("style_Image").value;
+    };
+  </script>
+</html>
